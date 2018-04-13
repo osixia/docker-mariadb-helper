@@ -1,0 +1,39 @@
+MARIADB_HOST: mariadb
+
+MARIADB_FROM_DATABASE: stable
+MARIADB_TO_DATABASE: example-app-hotfix-0-1-19
+
+MARIADB_TO_DATABASE_GRANT_USER: admin
+MARIADB_TO_DATABASE_GRANT_USER_HOST: 127.0.0.1
+MARIADB_TO_DATABASE_GRANT_PRIVILEGES: ALL
+
+# Prefix MARIADB_FROM_DATABASE database with MARIADB_TO_DATABASE regex capture group
+# example:
+# MARIADB_FROM_DATABASE: stable
+# MARIADB_TO_DATABASE: example-app-hotfix-0-1-19
+# MARIADB_FROM_DATABASE_REGEX: (.*-)[feature|release|hotfix|demo].*
+#
+# MARIADB_FROM_DATABASE will becomes: example-app-stable
+MARIADB_FROM_DATABASE_REGEX: "(.*-)[feature|release|hotfix|demo].*"
+
+MARIADB_ROOT_USER: admin
+MARIADB_ROOT_PASSWORD: admin
+
+# ssl
+MARIADB_SSL: true
+MARIADB_SSL_CIPHER_SUITE: TLSv1.2
+
+MARIADB_SSL_CRT_FILENAME: mariadb.crt
+MARIADB_SSL_KEY_FILENAME: mariadb.key
+MARIADB_SSL_CA_CRT_FILENAME: ca.crt
+
+# ssl-helper environment variables prefix
+MARIADB_SSL_HELPER_PREFIX: database # ssl-helper first search config from DATABASE_SSL_HELPER_* variables, before SSL_HELPER_* variables.
+
+DSN_EXPORT_FILE:
+DSN_EXPORT_VARIABLE_NAME:
+DSN_HOST:
+DSN_USER:
+DSN_PASSWORD:
+DSN_DATABASE:
+DSN_ARGS:
