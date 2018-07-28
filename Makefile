@@ -1,5 +1,5 @@
 NAME = osixia/mariadb-helper
-VERSION = 10.2.14
+VERSION = 10.3.8
 
 .PHONY: build build-nocache test tag-latest push push-latest release git-tag-version
 
