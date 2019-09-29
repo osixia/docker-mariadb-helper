@@ -1,20 +1,20 @@
 # Use osixia/light-baseimage
 # sources: https://github.com/osixia/docker-light-baseimage
-FROM osixia/light-baseimage:1.1.1
+FROM osixia/light-baseimage:release-1.2.0-dev
 
 # MariaDB version
-ARG MARIADB_MAJOR=10.3
-ARG MARIADB_VERSION=1:10.3.8+maria~stretch
+ARG MARIADB_MAJOR=10.4
+ARG MARIADB_VERSION=1:10.4.8+maria~buster
 
 # Add MariaDB repository
 RUN apt-key adv --recv-keys --keyserver keyserver.ubuntu.com 0xF1656F24C74CD1D8 \
-    && echo "deb http://ftp.igh.cnrs.fr/pub/mariadb/repo/$MARIADB_MAJOR/debian stretch main" > /etc/apt/sources.list.d/mariadb.list \
+    && echo "deb http://ftp.igh.cnrs.fr/pub/mariadb/repo/$MARIADB_MAJOR/debian buster main" > /etc/apt/sources.list.d/mariadb.list \
     && { \
-		     echo 'Package: *'; \
-		     echo 'Pin: release o=MariaDB'; \
-		     echo 'Pin-Priority: 999'; \
-	     } > /etc/apt/preferences.d/mariadb
-     # add repository pinning to make sure dependencies from this MariaDB repo are preferred over Debian dependencie
+    echo 'Package: *'; \
+    echo 'Pin: release o=MariaDB'; \
+    echo 'Pin-Priority: 999'; \
+    } > /etc/apt/preferences.d/mariadb
+# add repository pinning to make sure dependencies from this MariaDB repo are preferred over Debian dependencie
 
 # Add multiple process stack and ssl tools
 # sources: https://github.com/osixia/docker-light-baseimage/blob/stable/image/tool/add-multiple-process-stack
@@ -24,7 +24,7 @@ RUN apt-key adv --recv-keys --keyserver keyserver.ubuntu.com 0xF1656F24C74CD1D8 
 RUN apt-get -y update \
     && /container/tool/add-service-available :ssl-tools \
     && LC_ALL=C DEBIAN_FRONTEND=noninteractive apt-get install -y --no-install-recommends \
-       mariadb-client=$MARIADB_VERSION \
+    mariadb-client=$MARIADB_VERSION \
     && apt-get clean \
     && rm -rf /var/lib/apt/lists/* /tmp/* /var/tmp/*
 
